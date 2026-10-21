@@ -8,6 +8,7 @@ import { Pill } from "@/components/ui/Pill";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { careTypes, flowSteps, servicePage as p } from "@/content/service";
+import { Phrase } from "@/components/ui/Phrase";
 
 export const metadata: Metadata = {
   title: "事業内容",
@@ -43,8 +44,8 @@ export default function ServicePage() {
                   <Icon name={c.icon} className="size-7" />
                 </span>
                 <div>
-                  <h3 className="heading-3">{c.title}</h3>
-                  <p className="mt-1 text-brown">{c.short}</p>
+                  <h3 className="heading-3"><Phrase>{c.title}</Phrase></h3>
+                  <p className="mt-1 text-brown"><Phrase>{c.short}</Phrase></p>
                   {c.icon === "drip" && (
                     <ul className="mt-3 flex flex-wrap gap-1.5">
                       {p.medicalCareExamples.map((e) => (
@@ -87,7 +88,9 @@ export default function ServicePage() {
                 <span className="mt-1 grid size-6 shrink-0 place-items-center rounded-full bg-sage-soft text-sage-deep">
                   <Icon name="check" className="size-4" strokeWidth={1.8} />
                 </span>
-                <span>{s}</span>
+                <span>
+                  <Phrase>{s}</Phrase>
+                </span>
               </li>
             ))}
           </Reveal>
@@ -111,7 +114,7 @@ export default function ServicePage() {
                 />
                 <div className="relative px-6 py-8 sm:px-10 sm:py-10">
                   <p className="font-en text-lg text-sage-deep italic">{c.label}</p>
-                  <h3 className="mt-2 font-serif text-[19px] leading-[1.7] font-medium tracking-[0.08em] sm:text-[22px]">「{c.title}」</h3>
+                  <h3 className="mt-2 font-serif text-[19px] leading-[1.7] font-medium tracking-[0.08em] sm:text-[22px]"><Phrase>{`「${c.title}」`}</Phrase></h3>
                   <p className="mt-4 text-brown">{c.body}</p>
                 </div>
               </Reveal>
@@ -144,7 +147,7 @@ export default function ServicePage() {
                   {i + 1}
                 </span>
                 <div className="flex-1 rounded-[20px] bg-paper px-6 py-5 sm:px-7">
-                  <h3 className="heading-3">{s.titleDetail ?? s.title}</h3>
+                  <h3 className="heading-3"><Phrase>{s.titleDetail ?? s.title}</Phrase></h3>
                   <p className="mt-1 text-brown">{s.detail}</p>
                 </div>
               </Reveal>

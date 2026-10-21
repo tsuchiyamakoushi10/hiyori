@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { recruitBanner } from "@/content/home";
+import { Phrase } from "@/components/ui/Phrase";
 
 export function Recruit() {
   return (
@@ -14,7 +15,7 @@ export function Recruit() {
           </Reveal>
           <Reveal>
             <p className="mt-7 max-w-[34em] text-brown">{recruitBanner.body}</p>
-            <p className="mt-6 inline-block rounded-md border border-line bg-paper px-4 py-1.5 text-[13px]">{recruitBanner.jobs}</p>
+            <p className="mt-6 inline-block rounded-md border border-line bg-paper px-4 py-1.5 text-[13px]"><Phrase>{recruitBanner.jobs}</Phrase></p>
           </Reveal>
           <Reveal className="mt-8 flex flex-col items-start gap-3 sm:flex-row">
             <Button href={recruitBanner.primary.href}>{recruitBanner.primary.label}</Button>

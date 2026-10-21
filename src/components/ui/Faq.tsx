@@ -1,3 +1,5 @@
+import { Phrase } from "./Phrase";
+
 type Props = {
   items: { q: string; a: string }[];
 };
@@ -12,7 +14,7 @@ export function Faq({ items }: Props) {
             <span aria-hidden="true" className="font-en text-[22px] leading-none text-sage-deep italic">
               Q.
             </span>
-            <span className="flex-1 font-serif text-[15px] leading-[1.7] font-semibold tracking-[0.04em] sm:text-base">{item.q}</span>
+            <span className="flex-1 font-serif text-[15px] leading-[1.7] font-semibold tracking-[0.04em] sm:text-base"><Phrase>{item.q}</Phrase></span>
             <span aria-hidden="true" className="relative mt-2 size-3 shrink-0">
               <span className="absolute top-1/2 left-0 h-px w-3 bg-brown" />
               <span className="absolute top-0 left-1/2 h-3 w-px bg-brown transition-transform duration-300 group-open:rotate-90" />

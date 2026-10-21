@@ -3,6 +3,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { recruitPage as p } from "@/content/recruit";
 import { site, telHref } from "@/content/site";
+import { Phrase } from "@/components/ui/Phrase";
 
 // 採用ページ・スタッフ紹介の最後に置くCTA
 export function RecruitCta() {
@@ -14,7 +15,7 @@ export function RecruitCta() {
           style={{ background: "linear-gradient(135deg, var(--sun-soft), var(--peach-soft) 50%, var(--sage-soft))" }}
         >
           <p className="en-label">Entry</p>
-          <h2 className="heading-2 mt-3">{p.cta.heading}</h2>
+          <h2 className="heading-2 mt-3"><Phrase>{p.cta.heading}</Phrase></h2>
           <p className="mt-3 text-brown">{p.cta.body}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href={p.cta.entry.href}>{p.cta.entry.label}</Button>

@@ -4,6 +4,7 @@ import { RecruitCta } from "@/components/sections/recruit/RecruitCta";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { staffList, staffPage as p, workplaceData, type Staff } from "@/content/staff";
+import { Phrase } from "@/components/ui/Phrase";
 
 export const metadata: Metadata = {
   title: "スタッフ紹介",
@@ -72,7 +73,7 @@ function StaffCard({ staff: s, wide }: { staff: Staff; wide: boolean }) {
           />
         </div>
         <div>
-          <p className="font-serif text-[20px] leading-[1.7] tracking-[0.08em] text-brown sm:text-[24px]">{s.copy}</p>
+          <p className="font-serif text-[20px] leading-[1.7] tracking-[0.08em] text-brown sm:text-[24px]"><Phrase>{s.copy}</Phrase></p>
           <h2 className="mt-6 flex flex-wrap items-baseline gap-x-4">
             <span className="font-serif text-[22px] tracking-[0.14em]">{s.name}</span>
             <span className="text-[13px] text-brown">{s.role}</span>
@@ -97,7 +98,7 @@ function StaffCard({ staff: s, wide }: { staff: Staff; wide: boolean }) {
                     <span aria-hidden="true" className="font-en text-[20px] leading-none text-sage-deep italic">
                       Q.
                     </span>
-                    {item.q}
+                    <Phrase>{item.q}</Phrase>
                   </dt>
                   <dd className="mt-3 text-brown">{item.a}</dd>
                 </div>

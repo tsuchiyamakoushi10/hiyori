@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Phrase } from "./Phrase";
 
 type Props = {
   en: string;
@@ -19,7 +20,7 @@ export function SectionHeading({ en, lines, spBreak = true, align = "left", as: 
         {lines.map((line, i) => (
           <Fragment key={i}>
             {i > 0 && <br className={spBreak ? "" : "hidden sm:inline"} />}
-            {line}
+            <Phrase>{line}</Phrase>
           </Fragment>
         ))}
       </Tag>

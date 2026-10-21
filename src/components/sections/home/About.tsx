@@ -4,6 +4,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { about } from "@/content/home";
+import { Phrase } from "@/components/ui/Phrase";
 
 export function About() {
   return (
@@ -34,7 +35,7 @@ export function About() {
                   <span className="font-serif text-[30px] leading-tight font-medium text-brown sm:text-[38px]">{k.char}</span>
                   <Icon name={k.icon} className={`size-6 ${k.icon === "sun" ? "text-[#d9a24f]" : "text-sage-deep"}`} />
                 </p>
-                <p className="mt-2 text-[13px] leading-[1.9] text-brown">{k.text}</p>
+                <p className="mt-2 text-[13px] leading-[1.9] text-brown"><Phrase>{k.text}</Phrase></p>
               </Reveal>
             ))}
           </ul>

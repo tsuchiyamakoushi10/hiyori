@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { flowSteps } from "@/content/service";
+import { Phrase } from "@/components/ui/Phrase";
 
 export function Flow() {
   return (
@@ -19,7 +20,7 @@ export function Flow() {
               <span className="grid size-[60px] shrink-0 place-items-center rounded-full border border-sage bg-paper font-en text-[24px] text-sage-deep italic sm:mx-auto sm:size-[76px] sm:text-[28px]">
                 {i + 1}
               </span>
-              <span className="block font-serif text-[15px] leading-[1.6] font-semibold sm:mt-3">{s.title}</span>
+              <span className="block font-serif text-[15px] leading-[1.6] font-semibold sm:mt-3"><Phrase>{s.title}</Phrase></span>
             </Reveal>
           ))}
         </ol>

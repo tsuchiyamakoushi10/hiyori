@@ -44,7 +44,7 @@ export function PageHero({ en, title, path, photo, children }: Props) {
           <p className="en-label kv-fade" style={{ "--d": "0.1s" } as React.CSSProperties}>
             {en}
           </p>
-          <SplitText lines={[title]} className="mt-3 font-serif text-[28px] font-medium tracking-[0.16em] sm:text-[38px]" />
+          <SplitText lines={[title]} className="mt-3 font-serif text-[26px] font-medium tracking-[0.14em] sm:text-[38px] sm:tracking-[0.16em]" />
           {children && <div className="mt-6 max-w-[34em] text-brown">{children}</div>}
           <nav aria-label="パンくずリスト" className="mt-8 text-xs text-[#7f7268]">
             <ol className="flex flex-wrap items-center gap-2">

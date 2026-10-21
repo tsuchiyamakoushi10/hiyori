@@ -2,7 +2,7 @@
 
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
-type Tab = { id: string; label: string; content: ReactNode };
+type Tab = { id: string; label: ReactNode; content: ReactNode };
 
 // SEOのため両方のパネルをDOMに出力し、表示だけ切り替える（hidden 属性ではなく CSS で隠す）
 export function RequirementTabs({ tabs }: { tabs: Tab[] }) {

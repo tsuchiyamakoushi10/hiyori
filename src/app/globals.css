@@ -96,6 +96,26 @@ body {
   }
 }
 
+/* 改行：見出しは行の長さをそろえ、本文は最後の行が1〜2文字だけ残らないようにする */
+h1,
+h2,
+h3,
+dt {
+  text-wrap: balance;
+}
+p,
+li,
+dd,
+blockquote,
+figcaption {
+  text-wrap: pretty;
+}
+/* Phrase コンポーネント：文節の切れ目（<wbr>）でだけ改行する */
+.phrase {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 :focus-visible {
   outline: 2px solid var(--sage-deep);
   outline-offset: 3px;
