@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    formats: ["image/avif", "image/webp"],
+    // 写真は WebP に圧縮済みで届いているため、再圧縮すると画質が落ちる。そのまま配信する。
+    unoptimized: true,
   },
   cacheComponents: true,
   partialPrefetching: true,
