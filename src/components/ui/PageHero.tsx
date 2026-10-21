@@ -39,7 +39,7 @@ export function PageHero({ en, title, path, photo, children }: Props) {
         />
       </div>
 
-      <div className="container-site relative grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+      <div className="container-site relative grid items-center gap-10 lg:grid-cols-[1fr_auto]">
         <div>
           <p className="en-label kv-fade" style={{ "--d": "0.1s" } as React.CSSProperties}>
             {en}
