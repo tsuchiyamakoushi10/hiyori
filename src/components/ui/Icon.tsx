@@ -109,6 +109,44 @@ const paths: Record<string, React.ReactNode> = {
       <path d="M16.5 12h.01" />
     </>
   ),
+  shirt: (
+    <path d="M8.5 4 4 6.5l1.8 4L8 9.6V20h8V9.6l2.2.9 1.8-4L15.5 4c-.6 1.4-2 2.3-3.5 2.3S9.1 5.4 8.5 4Z" />
+  ),
+  car: (
+    <>
+      <path d="M4 16v-3.5L6 8h12l2 4.5V16" />
+      <path d="M3 16h18v2H3z" />
+      <circle cx="7.5" cy="18.5" r="1.5" />
+      <circle cx="16.5" cy="18.5" r="1.5" />
+      <path d="M7 12h10" />
+    </>
+  ),
+  route: (
+    <>
+      <circle cx="6" cy="18" r="2" />
+      <circle cx="18" cy="6" r="2" />
+      <path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7" />
+    </>
+  ),
+  tablet: (
+    <>
+      <rect x="5.5" y="3" width="13" height="18" rx="2" />
+      <path d="M11 18h2" />
+    </>
+  ),
+  book: (
+    <>
+      <path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5Z" />
+      <path d="M12 6v13.5" />
+    </>
+  ),
+  calendar: (
+    <>
+      <rect x="4" y="5.5" width="16" height="14.5" rx="2" />
+      <path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" />
+    </>
+  ),
+  check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   pin: (
     <>
       <path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z" />

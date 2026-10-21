@@ -91,13 +91,13 @@ export const recruitPage = {
   uniform: {
     heading: "それぞれの色で、同じ想いを。",
     body: "ひとりひとりの個性が、陽和のチカラに。動きやすく、心地よく、わたしたちらしく。",
-    // TODO 4色それぞれの写真が届いたら photo を差し替える（現在はスタッフ2名の写真で代用）
+    // TODO オリーブ・グレージュの写真が届いたら photo を入れる（未撮影のため色見本だけ表示）
     colors: [
-      { name: "オリーブ", value: "var(--olive)", photo: "/images/photos/staff-duo.webp" },
       { name: "ココアブラウン", value: "var(--cocoa)", photo: "/images/photos/portrait-brown.webp" },
       { name: "ティールグリーン", value: "var(--teal)", photo: "/images/photos/portrait-blue.webp" },
-      { name: "グレージュ", value: "var(--greige)", photo: "/images/photos/recruit-duo-car.webp" },
-    ],
+      { name: "オリーブ", value: "var(--olive)" },
+      { name: "グレージュ", value: "var(--greige)" },
+    ] as { name: string; value: string; photo?: string }[],
   },
   day: [
     { time: "9:00", text: "出勤・朝礼" },

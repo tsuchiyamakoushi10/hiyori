@@ -6,7 +6,7 @@ import { pro } from "@/content/home";
 import { site, telHref } from "@/content/site";
 
 // 病院・ケアマネジャーの方へ（TOP・事業内容で共通）
-export function ProBlock() {
+export function ProBlock({ body = pro.body }: { body?: string }) {
   return (
     <section aria-labelledby="pro-heading" className="container-site">
       <Reveal className="grid overflow-hidden rounded-[28px] bg-brown text-white lg:grid-cols-[220px_1.15fr_1fr]">
@@ -25,7 +25,7 @@ export function ProBlock() {
           <h2 id="pro-heading" className="mt-3 font-serif text-[21px] font-medium tracking-[0.1em] sm:text-[26px]">
             {pro.heading}
           </h2>
-          <p className="mt-4 text-[14px] opacity-95">{pro.body}</p>
+          <p className="mt-4 text-[14px] opacity-95">{body}</p>
         </div>
         <div className="px-6 pt-7 pb-9 sm:px-10 lg:py-12 lg:pr-12 lg:pl-4">
           <div className="space-y-3 rounded-[18px] bg-white/[0.08] px-6 py-6 sm:px-8">
