@@ -24,6 +24,16 @@ export function Area() {
             </ul>
             <p className="mt-5 text-[13px] text-brown">※{site.areaNote}</p>
           </Reveal>
+          <Reveal variant="mask" className="relative mt-8 aspect-[4/3] overflow-hidden rounded-[24px]">
+            <Image
+              src="/images/photos/work-car.webp"
+              alt="リュックを背負った看護師が、訪問に向かうため社用車に乗り込む様子"
+              fill
+              sizes="(min-width: 1024px) 420px, 100vw"
+              className="object-cover"
+              style={{ objectPosition: "38% 45%" }}
+            />
+          </Reveal>
         </div>
         <Reveal variant="mask">
           <AreaMap />
@@ -31,16 +41,6 @@ export function Area() {
         <Reveal variant="blur" className="hidden lg:block">
           <p className="tate text-[17px]">{site.introCopy}</p>
         </Reveal>
-      </div>
-      <div className="container-site mt-10 lg:-mt-6">
-        <Image
-          src="/images/deco/deco-town.webp"
-          alt=""
-          width={2172}
-          height={724}
-          sizes="(min-width: 1024px) 760px, 100vw"
-          className="pointer-events-none ml-auto h-auto w-full lg:w-[760px]"
-        />
       </div>
     </div>
   );
