@@ -125,6 +125,7 @@ public/images/
 - 見出しは「英字ラベル（小）→ 和文見出し（大）」の2段で組む（`SectionHeading` コンポーネント）
 - 和文見出しの改行は `<br>` で意味の切れ目に入れる。SPで不自然になる `<br>` は `sm:hidden` で消す
 - 本文は1行40字前後を目安に `max-width` を設定する
+- 見出し・短い一文・表の値は `<Phrase>`（`components/ui/Phrase.tsx`。BudouX で文節ごとに区切る）で囲み、言葉の途中で改行させない。本文は `text-wrap: pretty`、見出しは `text-wrap: balance`（`globals.css`）
 
 ### 4-3. レイアウト
 - コンテンツ幅 1160px（左右余白 40px／SP 20px）

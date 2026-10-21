@@ -12,6 +12,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { recruitPage as p } from "@/content/recruit";
 import { JsonLd, jobPostingJsonLd } from "@/lib/jsonld";
+import { Phrase } from "@/components/ui/Phrase";
 
 export const metadata: Metadata = {
   title: "採用情報",
@@ -75,7 +76,9 @@ export default function RecruitPage() {
               {p.wanted.map((w) => (
                 <li key={w} className="flex items-start gap-3 border-b border-line py-3 last:border-b-0">
                   <Icon name="leaf" className="mt-1.5 size-4 shrink-0 text-sage-deep" />
-                  <span>{w}</span>
+                  <span>
+                    <Phrase>{w}</Phrase>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -106,7 +109,7 @@ export default function RecruitPage() {
                   <span aria-hidden="true" className={`font-en text-[38px] leading-none italic ${meritColors[i]}`}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="heading-3 mt-3">{m.title}</h3>
+                  <h3 className="heading-3 mt-3"><Phrase>{m.title}</Phrase></h3>
                   <p className="mt-2 text-[14px] text-brown">{m.body}</p>
                 </div>
               </Reveal>
@@ -121,7 +124,7 @@ export default function RecruitPage() {
           <div className="flex items-end justify-between gap-6">
             <Reveal>
               <SectionHeading en="Facility" lines={["働く環境"]} />
-              <p className="mt-4 font-serif text-[18px] tracking-[0.1em] text-brown sm:text-[20px]">{p.facility.heading}</p>
+              <p className="mt-4 font-serif text-[18px] tracking-[0.1em] text-brown sm:text-[20px]"><Phrase>{p.facility.heading}</Phrase></p>
             </Reveal>
             <Image
               src="/images/deco/deco-house.webp"
@@ -154,7 +157,7 @@ export default function RecruitPage() {
                   <Icon name={b.icon} className="size-6" />
                 </span>
                 <div>
-                  <h3 className="font-serif text-[15px] font-semibold tracking-[0.06em]">{b.label}</h3>
+                  <h3 className="font-serif text-[15px] font-semibold tracking-[0.06em]"><Phrase>{b.label}</Phrase></h3>
                   <p className="mt-1 text-[13.5px] leading-[1.85] text-brown">{b.body}</p>
                 </div>
               </Reveal>
@@ -169,7 +172,7 @@ export default function RecruitPage() {
           <div>
             <Reveal>
               <SectionHeading en="Uniform" lines={["ユニフォーム紹介"]} />
-              <p className="mt-6 font-serif text-[18px] tracking-[0.1em] sm:text-[20px]">{p.uniform.heading}</p>
+              <p className="mt-6 font-serif text-[18px] tracking-[0.1em] sm:text-[20px]"><Phrase>{p.uniform.heading}</Phrase></p>
               <p className="mt-4 text-brown">{p.uniform.body}</p>
             </Reveal>
           </div>
@@ -213,7 +216,7 @@ export default function RecruitPage() {
             <RequirementTabs
               tabs={p.requirements.map((r) => ({
                 id: r.id,
-                label: r.label,
+                label: <Phrase>{r.label}</Phrase>,
                 content: (
                   <>
                     <h3 className="heading-3 mb-4">{r.title}</h3>
@@ -236,7 +239,7 @@ export default function RecruitPage() {
             {p.steps.map((s, i) => (
               <li key={s} className="relative flex items-center gap-4 rounded-[20px] bg-paper px-6 py-5">
                 <span className="font-en text-[28px] leading-none text-sage-deep italic">{i + 1}</span>
-                <span className="font-serif text-[15px] font-semibold tracking-[0.04em]">{s}</span>
+                <span className="font-serif text-[15px] font-semibold tracking-[0.04em]"><Phrase>{s}</Phrase></span>
               </li>
             ))}
           </Reveal>

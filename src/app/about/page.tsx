@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { aboutPage as p } from "@/content/about";
 import { site } from "@/content/site";
+import { Phrase } from "@/components/ui/Phrase";
 
 export const metadata: Metadata = {
   title: "陽和とは",
@@ -36,7 +37,9 @@ export default function AboutPage() {
           </Reveal>
           <Reveal variant="blur" className="mx-auto mt-10 max-w-[44em] space-y-6 font-serif text-[18px] leading-[2.1] tracking-[0.08em] text-ink sm:text-[22px]">
             {p.philosophy.map((line) => (
-              <p key={line}>{line}</p>
+              <p key={line}>
+                <Phrase>{line}</Phrase>
+              </p>
             ))}
           </Reveal>
         </div>
@@ -55,8 +58,8 @@ export default function AboutPage() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="heading-3">{n.title}</h3>
-                  <p className="mt-2 text-brown">{n.body}</p>
+                  <h3 className="heading-3"><Phrase>{n.title}</Phrase></h3>
+                  <p className="mt-2 text-brown"><Phrase>{n.body}</Phrase></p>
                 </div>
               </Reveal>
             ))}
@@ -105,13 +108,13 @@ export default function AboutPage() {
             <Reveal className="mt-6 text-center lg:text-left">
               <p className="text-[13px] text-brown">{p.message.role}</p>
               <p className="mt-1 font-serif text-2xl tracking-[0.14em]">{p.message.name}</p>
-              <p className="mt-3 text-[13px] leading-[1.9] text-brown">{p.message.career}</p>
+              <p className="mt-3 text-[13px] leading-[1.9] text-brown"><Phrase>{p.message.career}</Phrase></p>
             </Reveal>
           </div>
           <div>
             <Reveal>
               <SectionHeading en="Message" lines={[p.message.label]} />
-              <p className="mt-6 font-serif text-[19px] leading-[1.9] tracking-[0.08em] text-brown sm:text-[22px]">{p.message.heading}</p>
+              <p className="mt-6 font-serif text-[19px] leading-[1.9] tracking-[0.08em] text-brown sm:text-[22px]"><Phrase>{p.message.heading}</Phrase></p>
             </Reveal>
             <div className="mt-8 max-w-[40em] space-y-6">
               {p.message.before.map((t) => (

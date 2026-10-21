@@ -3,6 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { strengths } from "@/content/home";
 import { site } from "@/content/site";
+import { Phrase } from "@/components/ui/Phrase";
 
 const accents = [
   { no: "text-sun", bg: "bg-sun-soft" },
@@ -35,7 +36,7 @@ export function Strength() {
                   <Icon name={s.icon} className="size-7" />
                 </span>
               </div>
-              <h3 className="heading-3 mt-5">{s.title}</h3>
+              <h3 className="heading-3 mt-5"><Phrase>{s.title}</Phrase></h3>
               <p className="mt-3 text-[13.5px] leading-[1.9] text-brown">{s.body}</p>
             </Reveal>
           ))}

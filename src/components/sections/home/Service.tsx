@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { serviceNotes } from "@/content/home";
 import { careTypes } from "@/content/service";
+import { Phrase } from "@/components/ui/Phrase";
 
 const iconBgs = ["bg-peach-soft", "bg-sage-soft", "bg-[#e3eeed]", "bg-sun-soft"];
 
@@ -22,13 +23,13 @@ export function Service() {
               as="li"
               key={c.title}
               index={i % 4}
-              className="rounded-[20px] border border-line bg-paper px-3 pt-6 pb-6 text-center sm:px-6 sm:pt-8 sm:pb-7"
+              className="rounded-[20px] border border-line bg-paper px-2.5 pt-6 pb-6 text-center sm:px-6 sm:pt-8 sm:pb-7"
             >
               <span className={`mx-auto grid size-14 place-items-center rounded-full text-brown sm:size-16 ${iconBgs[i % 4]}`}>
                 <Icon name={c.icon} className="size-7" />
               </span>
-              <h3 className="mt-4 font-serif text-[15px] font-semibold tracking-[0.06em] sm:text-[17px]">{c.title}</h3>
-              <p className="mt-2 text-left text-[12px] leading-[1.8] text-brown sm:text-center sm:text-[12.5px]">{c.short}</p>
+              <h3 className="mt-4 font-serif text-[15px] font-semibold tracking-[0.06em] sm:text-[17px]"><Phrase>{c.title}</Phrase></h3>
+              <p className="mt-2 text-left text-[11.5px] leading-[1.8] tracking-normal min-[375px]:text-[12px] text-brown sm:text-center sm:text-[12.5px] sm:tracking-[0.04em]"><Phrase>{c.short}</Phrase></p>
             </Reveal>
           ))}
         </ul>
