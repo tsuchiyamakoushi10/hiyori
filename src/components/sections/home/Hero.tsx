@@ -46,9 +46,9 @@ export function Hero() {
             src="/images/photos/top-hero-care.webp"
             alt="看護師が利用者さまの手を取り、笑顔で話している様子"
             sizes="(min-width: 1024px) 520px, 80vw"
-            position="62% 40%"
+            position="45% 40%"
             preload
-            className="kv-photo mr-auto ml-[8%] h-[380px] w-[78%] sm:h-[520px] lg:mx-0 lg:h-[600px] lg:w-[86%]"
+            className="kv-photo mr-auto ml-[3%] h-[380px] w-[87%] sm:h-[520px] lg:mx-0 lg:h-[600px] lg:w-[86%]"
           />
           <p className="tate absolute top-6 right-0 text-[13px] sm:text-[15px] lg:top-14 lg:right-[-8px]">
             {site.subCopy.light}
