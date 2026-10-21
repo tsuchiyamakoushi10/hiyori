@@ -58,19 +58,20 @@ export default function StaffPage() {
 
 function StaffCard({ staff: s, wide }: { staff: Staff; wide: boolean }) {
   return (
-    <Reveal as="article" className="overflow-hidden rounded-[24px] border border-line bg-paper">
-      <div className={`grid ${wide ? "lg:grid-cols-[420px_1fr]" : ""}`}>
-        <div className={`relative aspect-[4/3] bg-bg2 ${wide ? "lg:aspect-auto lg:min-h-[420px]" : ""}`}>
+    <Reveal as="article" className="rounded-[24px] border border-line bg-paper px-6 py-8 sm:px-10 sm:py-10">
+      {/* 写真は大きくせず、アーチ型で名前の横に添える */}
+      <div className={`grid gap-8 ${wide ? "sm:grid-cols-[200px_1fr] sm:gap-10" : ""}`}>
+        <div className="arch relative mx-auto aspect-[4/5] w-[180px] bg-bg2 sm:w-[200px]">
           <Image
             src={s.photo.src}
             alt={s.photo.alt}
             fill
-            sizes={wide ? "(min-width: 1024px) 420px, 100vw" : "(min-width: 1024px) 560px, 100vw"}
+            sizes="200px"
             className="object-cover"
             style={{ objectPosition: s.photo.position }}
           />
         </div>
-        <div className="px-6 py-8 sm:px-10 sm:py-10">
+        <div>
           <p className="font-serif text-[20px] leading-[1.7] tracking-[0.08em] text-brown sm:text-[24px]">{s.copy}</p>
           <h2 className="mt-6 flex flex-wrap items-baseline gap-x-4">
             <span className="font-serif text-[22px] tracking-[0.14em]">{s.name}</span>
