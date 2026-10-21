@@ -38,8 +38,8 @@
 }
 
 .intro-on {
-  --intro-delay: 2.2s;
-  --kv-delay: 2.2s;
+  --intro-delay: 2.8s;
+  --kv-delay: 2.8s;
 }
 
 @theme inline {
@@ -257,7 +257,7 @@ figcaption {
 }
 .intro-on .intro {
   display: flex;
-  animation: intro-out 1s ease 1.2s forwards;
+  animation: intro-out 1.5s ease 2.4s forwards;
 }
 .intro-on .intro .intro-item {
   opacity: 0;
