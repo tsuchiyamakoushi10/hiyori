@@ -33,7 +33,7 @@
 - バリデーション：zod（クライアント・サーバーの両方）
 - アニメーション：CSS ＋ IntersectionObserver で自作（5章）。アニメーション用のライブラリは入れない
 - フォント：`next/font/google` で Shippori Mincho（400/500/600）、Noto Sans JP（400/500）、Cormorant Garamond Italic（400/500）を読み込む
-- 画像：`next/image`。WebP/AVIFで自動最適化
+- 画像：`next/image`。写真は圧縮済みWebPで届くため、再圧縮で画質が落ちないよう `images.unoptimized: true`（自動最適化はしない）
 
 ### 環境変数（Vercelに設定。コードに直書きしない）
 ```
