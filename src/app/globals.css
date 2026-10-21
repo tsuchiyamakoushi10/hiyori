@@ -329,6 +329,10 @@ body {
 .kv-photo img {
   animation: kv-zoom 20s var(--ease-out) var(--kv-delay) both;
 }
+/* 下層ページの写真はズームさせない（顔が拡大して見えるため） */
+.kv-photo.no-zoom img {
+  animation: none;
+}
 @keyframes kv-zoom {
   from { transform: scale(1.15); }
   to { transform: scale(1); }

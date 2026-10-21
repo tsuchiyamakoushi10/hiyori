@@ -65,7 +65,7 @@ export function PageHero({ en, title, path, photo, children }: Props) {
             position={photo.position}
             sizes="(min-width: 1024px) 340px, 60vw"
             preload
-            className="kv-photo mx-auto h-[260px] w-[220px] sm:h-[340px] sm:w-[280px] lg:mx-0 lg:h-[400px] lg:w-[340px]"
+            className="kv-photo no-zoom mx-auto h-[260px] w-[220px] sm:h-[340px] sm:w-[280px] lg:mx-0 lg:h-[400px] lg:w-[340px]"
           />
         )}
       </div>
