@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { RecruitCta } from "@/components/sections/recruit/RecruitCta";
+import { RequirementDetail } from "@/components/sections/recruit/RequirementDetail";
 import { FacilityGallery } from "@/components/sections/recruit/FacilityGallery";
 import { RequirementTabs } from "@/components/sections/recruit/RequirementTabs";
 import { UniformSwitcher } from "@/components/sections/recruit/UniformSwitcher";
 import { Faq } from "@/components/ui/Faq";
 import { Icon } from "@/components/ui/Icon";
-import { InfoTable } from "@/components/ui/InfoTable";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { recruitPage as p } from "@/content/recruit";
+import { recruitPage as p, requirementText } from "@/content/recruit";
 import { JsonLd, jobPostingJsonLd } from "@/lib/jsonld";
 import { Phrase } from "@/components/ui/Phrase";
 
@@ -220,7 +220,7 @@ export default function RecruitPage() {
                 content: (
                   <>
                     <h3 className="heading-3 mb-4">{r.title}</h3>
-                    <InfoTable rows={r.rows} />
+                    <RequirementDetail r={r} />
                   </>
                 ),
               }))}
@@ -265,10 +265,10 @@ export default function RecruitPage() {
           key={r.id}
           data={jobPostingJsonLd({
             title: r.label,
-            description: r.rows.map(([k, v]) => `${k}：${v}`).join("\n"),
+            description: requirementText(r),
             datePosted: p.datePosted,
             validThrough: p.validThrough,
-            salary: r.salary,
+            salary: r.jsonLdSalary,
           })}
         />
       ))}
