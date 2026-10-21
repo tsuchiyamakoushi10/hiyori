@@ -1,0 +1,474 @@
+@import "tailwindcss";
+
+/* ============================================================
+   デザイントークン（CLAUDE.md 4-1）
+   ============================================================ */
+:root {
+  --bg: #fbf8f2;
+  --bg2: #f4eee4;
+  --paper: #fffdf9;
+  --ink: #4a3f38;
+  --brown: #7e6758;
+  --muted: #9a8d82;
+  --line: #e6ddd0;
+  --sun: #f7c77e;
+  --sun-soft: #fcebcb;
+  --peach: #f2a98b;
+  --peach-soft: #fbe3d8;
+  --sage: #9daa8e;
+  --sage-deep: #6f7f62;
+  --sage-soft: #e7ebdf;
+  --olive: #7e8a62;
+  --cocoa: #836856;
+  --teal: #89aba9;
+  --greige: #d8cec5;
+  --error: #b5543c;
+
+  /* イージング（CLAUDE.md 5-7） */
+  --ease-out: cubic-bezier(0.17, 0.84, 0.44, 1);
+  --ease-mask: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --ease-menu: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-rise: cubic-bezier(0.47, 0, 0.75, 0.72);
+
+  /* オープニングの有無でずらす時間（.intro-on で上書き） */
+  --intro-delay: 0s;
+  --kv-delay: 0.2s;
+
+  --shadow-soft: 0 30px 60px -30px rgba(126, 103, 88, 0.35);
+}
+
+.intro-on {
+  --intro-delay: 2.2s;
+  --kv-delay: 2.2s;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-brown: var(--brown);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-sun: var(--sun);
+  --color-sun-soft: var(--sun-soft);
+  --color-peach: var(--peach);
+  --color-peach-soft: var(--peach-soft);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-sage-soft: var(--sage-soft);
+  --color-olive: var(--olive);
+  --color-cocoa: var(--cocoa);
+  --color-teal: var(--teal);
+  --color-greige: var(--greige);
+  --color-error: var(--error);
+
+  --font-serif: var(--font-shippori), "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-sans: var(--font-noto), "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-en: var(--font-cormorant), "Times New Roman", serif;
+
+  --radius-card: 20px;
+  --radius-photo: 24px;
+}
+
+/* ============================================================
+   ベース
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "palt" 0;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--sage-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--sun-soft);
+}
+
+/* ============================================================
+   共通の部品
+   ============================================================ */
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: calc(1160px + 80px);
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 640px) {
+    .container-site {
+      padding-inline: 40px;
+    }
+  }
+
+  .section-pad {
+    padding-block: 90px;
+  }
+  @media (min-width: 1024px) {
+    .section-pad {
+      padding-block: 140px;
+    }
+  }
+
+  .en-label {
+    font-family: var(--font-en);
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: var(--sage-deep);
+  }
+  @media (min-width: 640px) {
+    .en-label {
+      font-size: 20px;
+    }
+  }
+
+  .heading-2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    line-height: 1.7;
+  }
+  @media (min-width: 640px) {
+    .heading-2 {
+      font-size: 30px;
+    }
+  }
+
+  .heading-3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+  @media (min-width: 640px) {
+    .heading-3 {
+      font-size: 18px;
+    }
+  }
+
+  /* 縦書きの添え書き（手書き風メモ） */
+  .tate {
+    writing-mode: vertical-rl;
+    font-family: var(--font-serif);
+    letter-spacing: 0.3em;
+    line-height: 2.1;
+    color: var(--brown);
+  }
+
+  /* アーチ型フレーム（ひだまりの窓） */
+  .arch {
+    border-radius: 300px 300px 24px 24px;
+    overflow: hidden;
+  }
+}
+
+/* ============================================================
+   ボタンの矢印（5-6：くっと弾む）
+   ============================================================ */
+.btn-arrow {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  flex: none;
+}
+.btn-arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 7px;
+  height: 1px;
+  background: currentColor;
+  transform: rotate(35deg);
+  transform-origin: right center;
+}
+.btn:hover .btn-arrow,
+.btn:focus-visible .btn-arrow {
+  animation: arrow-bounce 0.8s forwards;
+}
+@keyframes arrow-bounce {
+  0% { transform: translateX(0); }
+  5% { transform: translateX(12px); }
+  10% { transform: translateX(6px); }
+  15% { transform: translateX(10px); }
+  20%, 100% { transform: translateX(8px); }
+}
+
+/* リンク付き写真：ホバーでゆっくり寄る */
+.zoom-on-hover img {
+  transition: transform 0.8s var(--ease-out);
+}
+.zoom-on-hover:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   5-1 オープニング
+   ============================================================ */
+.intro {
+  display: none;
+}
+.intro-on .intro {
+  display: flex;
+  animation: intro-out 1s ease 1.2s forwards;
+}
+.intro-on .intro .intro-item {
+  opacity: 0;
+  animation: fade-up 0.6s ease 0.3s forwards;
+}
+.intro-on .intro .intro-item + .intro-item {
+  animation-delay: 0.4s;
+}
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   5-2 ヒーロー背景の装飾（光と葉）
+   ============================================================ */
+.hero-deco {
+  animation: deco-settle 6s ease 0.3s both;
+}
+@keyframes deco-settle {
+  from { transform: scale(1.15) translateY(30px); }
+  to { transform: scale(1) translateY(0); }
+}
+.deco-item {
+  position: absolute;
+  opacity: 0;
+}
+.deco-1 {
+  rotate: -0.05turn;
+  animation:
+    deco-fade-1 2s ease 0.3s forwards,
+    drift-x 80s linear infinite alternate;
+}
+.deco-2 {
+  rotate: -0.04turn;
+  animation:
+    deco-fade-2 4s ease 1s forwards,
+    drift-x 160s linear infinite alternate;
+}
+.deco-3 {
+  rotate: -0.008turn;
+  animation:
+    deco-fade-3 6s ease 2s forwards,
+    drift-x 220s linear infinite alternate;
+}
+@keyframes deco-fade-1 { to { opacity: 0.6; } }
+@keyframes deco-fade-2 { to { opacity: 0.15; } }
+@keyframes deco-fade-3 { to { opacity: 0.2; } }
+@keyframes drift-x {
+  from { translate: 0 0; }
+  to { translate: -30% 0; }
+}
+
+/* 下層ページ：縦方向に漂う */
+.deco-v1 {
+  animation:
+    deco-fade-2 4s ease 0.3s forwards,
+    drift-y 80s linear infinite alternate;
+}
+.deco-v2 {
+  animation:
+    deco-fade-3 6s ease 1s forwards,
+    drift-y 180s linear infinite alternate;
+}
+@keyframes drift-y {
+  from { translate: 0 -25%; }
+  to { translate: 0 0; }
+}
+
+/* ============================================================
+   5-3 メインビジュアル
+   ============================================================ */
+.kv-photo {
+  opacity: 0;
+  animation: fade-in 0.5s var(--ease-out) var(--kv-delay) forwards;
+}
+.kv-photo img {
+  animation: kv-zoom 20s var(--ease-out) var(--kv-delay) both;
+}
+@keyframes kv-zoom {
+  from { transform: scale(1.15); }
+  to { transform: scale(1); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.kv-fade {
+  opacity: 0;
+  animation: fade-in 1s ease calc(var(--intro-delay) + var(--d, 1s)) forwards;
+}
+
+/* ============================================================
+   5-4 スクロールで現れる
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s linear var(--delay, 0s),
+    transform 0.6s var(--ease-rise) var(--delay, 0s);
+}
+.reveal.is-show {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-mask {
+  opacity: 0;
+  filter: blur(30px);
+  mask-image: linear-gradient(90deg, #000 0, #000 50%, transparent 100%);
+  mask-size: 200% 100%;
+  mask-position: 200% 0;
+  mask-repeat: no-repeat;
+  transition:
+    mask-position 1.5s var(--ease-mask) var(--delay, 0s),
+    filter 1.5s var(--ease-mask) var(--delay, 0s),
+    opacity 1s ease var(--delay, 0s);
+}
+.reveal-mask.is-show {
+  opacity: 1;
+  filter: blur(0);
+  mask-position: 0 0;
+}
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(30px);
+  transition:
+    filter 1s var(--ease-mask) var(--delay, 0s),
+    opacity 1s var(--ease-mask) var(--delay, 0s);
+}
+.reveal-blur.is-show {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* ============================================================
+   5-5 1文字ずつ
+   ============================================================ */
+.split-line {
+  display: block;
+}
+.split-char {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.split-char > span {
+  display: inline-block;
+  transform: translate3d(0, 100%, 0);
+  animation:
+    char-rise 1s var(--ease-out) var(--cd) forwards,
+    char-color 1s linear var(--cd) both;
+}
+@keyframes char-rise {
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes char-color {
+  0% { color: var(--sun); }
+  15% { color: var(--peach); }
+  30% { color: var(--sage); }
+  45% { color: var(--teal); }
+  60% { color: var(--cocoa); }
+  100% { color: var(--ink); }
+}
+
+/* ============================================================
+   5-6 SPの追従ボタン：ときどきゆれる
+   ============================================================ */
+.wiggle {
+  animation: wiggle 6s linear infinite alternate;
+}
+@keyframes wiggle {
+  0%, 90% { transform: rotate(0) scale(1); }
+  92% { transform: rotate(6deg) scale(1.1); }
+  94% { transform: rotate(-6deg) scale(1.1); }
+  96% { transform: rotate(6deg) scale(1.1); }
+  98%, 100% { transform: rotate(0) scale(1); }
+}
+
+/* ============================================================
+   動きを減らす設定
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .intro-on .intro {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .deco-item {
+    animation: none !important;
+    opacity: 0.2;
+  }
+  .reveal,
+  .reveal-mask,
+  .reveal-blur,
+  .kv-photo,
+  .kv-fade {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    mask-image: none;
+  }
+  .split-char > span {
+    transform: none;
+    animation: none;
+  }
+  .wiggle {
+    animation: none;
+  }
+}
