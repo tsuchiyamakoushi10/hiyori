@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import logoType from "../../../public/images/logo/logo-type.png";
-import { navItems, site, telHref } from "@/content/site";
+import { navItems, site } from "@/content/site";
 import { MobileMenu } from "./MobileMenu";
 
 export function Header() {
@@ -56,15 +56,20 @@ export function Header() {
               );
             })}
           </ul>
-          <a href={telHref(site.tel)} className="font-en text-[19px] tracking-[0.04em] text-brown italic">
-            {site.tel}
-          </a>
-          <Link
-            href="/contact"
-            className="inline-flex min-h-11 items-center rounded-full bg-sage-deep px-6 text-[13px] tracking-[0.12em] text-white transition-colors duration-300 hover:bg-[#7a8b6d]"
-          >
-            お問い合わせ
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/entry"
+              className="inline-flex min-h-11 items-center rounded-full border border-brown bg-paper/70 px-6 text-[13px] tracking-[0.12em] text-brown transition-colors duration-300 hover:bg-paper"
+            >
+              採用エントリー
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex min-h-11 items-center rounded-full bg-sage-deep px-6 text-[13px] tracking-[0.12em] text-white transition-colors duration-300 hover:bg-[#7a8b6d]"
+            >
+              お問い合わせ
+            </Link>
+          </div>
         </nav>
 
         <MobileMenu />
