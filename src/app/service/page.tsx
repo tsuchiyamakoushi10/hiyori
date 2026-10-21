@@ -74,7 +74,7 @@ export default function ServicePage() {
             </Reveal>
             <div className="mt-10 grid grid-cols-2 gap-3">
               <Reveal variant="mask" className="relative aspect-[4/5] overflow-hidden rounded-[24px]">
-                <Image src="/images/photos/service-check.webp" alt="看護師が利用者さまの体調を確認する様子" fill sizes="(min-width: 1024px) 240px, 45vw" className="object-cover" />
+                <Image src="/images/photos/service-walk.webp" alt="看護師が利用者さまの手を取り、屋外で付き添う様子" fill sizes="(min-width: 1024px) 240px, 45vw" className="object-cover" style={{ objectPosition: "35% 50%" }} />
               </Reveal>
               <Reveal variant="mask" index={2} className="relative mt-10 aspect-[4/5] overflow-hidden rounded-[24px]">
                 <Image src="/images/photos/service-auscultation.webp" alt="看護師が聴診器で利用者さまの胸の音を聴く様子" fill sizes="(min-width: 1024px) 240px, 45vw" className="object-cover" />
