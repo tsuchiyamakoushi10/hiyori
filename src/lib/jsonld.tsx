@@ -1,14 +1,20 @@
+import { careTypes } from "@/content/service";
 import { group, site } from "@/content/site";
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export const siteDescription =
+  "さいたま市北区の訪問看護ステーション陽和（ひより）。がん・緩和ケア、難病、医療的ケア、小児、精神科、ご自宅での看取りまで。北区・西区・大宮区・上尾市・伊奈町に訪問します。";
 
 export function medicalBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     name: site.name,
-    alternateName: site.nameEn,
+    alternateName: [site.nameEn, "陽和", "ひより"],
+    description: siteDescription,
     url: siteUrl,
+    image: `${siteUrl}/opengraph-image.png`,
     logo: `${siteUrl}/images/logo/logo-vertical.png`,
     telephone: `+81-${site.tel.slice(1)}`,
     faxNumber: `+81-${site.fax.slice(1)}`,
@@ -28,6 +34,7 @@ export function medicalBusinessJsonLd() {
         closes: "18:00",
       },
     ],
+    knowsAbout: careTypes.map((c) => c.title),
     areaServed: ["さいたま市北区", "さいたま市西区", "さいたま市大宮区", "上尾市", "伊奈町"].map((name) => ({
       "@type": "City",
       name,

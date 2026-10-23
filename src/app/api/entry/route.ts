@@ -1,7 +1,10 @@
-import { clientIp, formatBody, isTooFrequent, markSent, sendMail, signature } from "@/lib/mail";
+import { clientIp, isAllowedRequest, formatBody, isTooFrequent, markSent, sendMail, signature } from "@/lib/mail";
 import { entrySchema, toFieldErrors } from "@/lib/schema";
 
 export async function POST(request: Request) {
+  if (!isAllowedRequest(request)) {
+    return Response.json({ ok: false, message: "送信内容を読み取れませんでした" }, { status: 403 });
+  }
   const body = await request.json().catch(() => null);
   if (!body || typeof body !== "object") {
     return Response.json({ ok: false, message: "送信内容を読み取れませんでした" }, { status: 400 });
@@ -38,6 +41,12 @@ export async function POST(request: Request) {
     ["ご希望の連絡方法・時間帯", v.contactTime],
     ["ご質問など", v.message],
   ]);
+  // 入力者への控えには、選択肢の項目だけを載せる（自由記入欄を他人宛ての迷惑メールに悪用させないため）
+  const replyDetail = formatBody([
+    ["ご希望", v.wish],
+    ["希望職種", v.job],
+    ["雇用形態", v.employment],
+  ]);
 
   try {
     await sendMail({
@@ -49,7 +58,7 @@ export async function POST(request: Request) {
     await sendMail({
       to: v.email,
       subject: "【訪問看護ステーション陽和】エントリーを受け付けました",
-      text: `${v.name}様\n\n陽和にご関心をお寄せいただき、ありがとうございます。\n以下の内容で受け付けました。担当者よりご連絡いたします。\n\n${detail}\n${signature}`,
+      text: `${v.name}様\n\n陽和にご関心をお寄せいただき、ありがとうございます。\n以下の内容で受け付けました。担当者よりご連絡いたします。\n\n${replyDetail}\n${signature}`,
     });
   } catch (e) {
     console.error(e);

@@ -3,7 +3,7 @@ import { Cormorant_Garamond, Noto_Sans_JP, Shippori_Mincho } from "next/font/goo
 import { FloatingCta } from "@/components/layout/FloatingCta";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { JsonLd, medicalBusinessJsonLd, siteUrl } from "@/lib/jsonld";
+import { JsonLd, medicalBusinessJsonLd, siteDescription, siteUrl } from "@/lib/jsonld";
 import "./globals.css";
 
 const shippori = Shippori_Mincho({
@@ -38,8 +38,7 @@ export const metadata: Metadata = {
     default: titleSuffix,
     template: `%s｜${titleSuffix}`,
   },
-  description:
-    "さいたま市北区の訪問看護ステーション陽和（ひより）。がん・緩和ケア、難病、医療的ケア、小児、精神科、ご自宅での看取りまで。北区・西区・大宮区・上尾市・伊奈町に訪問します。",
+  description: siteDescription,
   openGraph: {
     type: "website",
     locale: "ja_JP",

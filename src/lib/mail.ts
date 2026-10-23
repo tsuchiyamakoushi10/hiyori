@@ -49,6 +49,21 @@ export function markSent(ip: string) {
   }
 }
 
+/**
+ * ほかのサイトからの送信を断る。ブラウザは送信元を Origin ヘッダーに付けるので、
+ * 自サイトのホストと一致しないものは受け付けない。
+ */
+export function isAllowedRequest(request: Request) {
+  if (!request.headers.get("content-type")?.includes("application/json")) return false;
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
+  try {
+    return new URL(origin).host === request.headers.get("host");
+  } catch {
+    return false;
+  }
+}
+
 export function clientIp(headers: Headers) {
   return headers.get("x-forwarded-for")?.split(",")[0]?.trim() || headers.get("x-real-ip") || "unknown";
 }
