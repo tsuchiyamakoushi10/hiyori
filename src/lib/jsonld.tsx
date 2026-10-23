@@ -1,4 +1,4 @@
-import { site } from "@/content/site";
+import { group, site } from "@/content/site";
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -32,7 +32,11 @@ export function medicalBusinessJsonLd() {
       "@type": "City",
       name,
     })),
-    parentOrganization: { "@type": "Organization", name: site.operatorShort },
+    parentOrganization: {
+      "@type": "Organization",
+      name: site.operatorShort,
+      parentOrganization: { "@type": "Organization", name: group.name, url: group.url },
+    },
   };
 }
 

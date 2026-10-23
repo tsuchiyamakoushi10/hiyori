@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import logoSymbol from "../../../public/images/logo/logo-symbol.png";
+import { Button } from "@/components/ui/Button";
 import { InfoTable } from "@/components/ui/InfoTable";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { aboutPage as p } from "@/content/about";
-import { site } from "@/content/site";
+import { group, site } from "@/content/site";
 import { Phrase } from "@/components/ui/Phrase";
 
 export const metadata: Metadata = {
@@ -179,6 +180,43 @@ export default function AboutPage() {
                 />
               </Reveal>
             </div>
+          </div>
+
+          <div className="mt-20">
+            <Reveal>
+              <SectionHeading en="Group" lines={[group.name]} as="h3" />
+              <p className="mt-6 max-w-[40em] text-brown">
+                {site.operatorShort}は{group.name}の一員です。グループの各法人のサイトもご覧ください。
+              </p>
+            </Reveal>
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {group.companies.map((c, i) => (
+                <Reveal as="li" key={c.name} index={i}>
+                  {c.url ? (
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex h-full min-h-[88px] items-center justify-between gap-3 rounded-[20px] border border-line bg-paper py-5 pr-5 pl-6 transition-colors duration-300 hover:border-sage"
+                    >
+                      <span className="font-serif text-[15px] font-semibold tracking-[0.02em] text-ink"><Phrase>{c.name}</Phrase></span>
+                      <span aria-hidden="true" className="text-sage-deep transition-transform duration-300 group-hover:translate-x-1">↗</span>
+                      <span className="sr-only">（別サイトが開きます）</span>
+                    </a>
+                  ) : (
+                    <div className="flex h-full min-h-[88px] flex-col justify-center rounded-[20px] border border-sage bg-paper px-6 py-5">
+                      <span className="font-serif text-[15px] font-semibold tracking-[0.02em] text-ink"><Phrase>{c.name}</Phrase></span>
+                      <span className="text-[12px] text-brown">陽和の運営法人</span>
+                    </div>
+                  )}
+                </Reveal>
+              ))}
+            </ul>
+            <Reveal className="mt-8">
+              <Button href={group.url} variant="secondary" external>
+                {group.name}のサイトへ
+              </Button>
+            </Reveal>
           </div>
         </div>
       </section>
