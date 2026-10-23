@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { About } from "@/components/sections/home/About";
 import { Area } from "@/components/sections/home/Area";
 import { Flow } from "@/components/sections/home/Flow";
@@ -8,10 +9,16 @@ import { ProBlock } from "@/components/sections/home/ProBlock";
 import { Recruit } from "@/components/sections/home/Recruit";
 import { Service } from "@/components/sections/home/Service";
 import { Strength } from "@/components/sections/home/Strength";
+import { JsonLd, websiteJsonLd } from "@/lib/jsonld";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={websiteJsonLd()} />
       <Intro />
       <Hero />
       <News />

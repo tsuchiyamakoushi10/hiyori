@@ -21,6 +21,7 @@ export function medicalBusinessJsonLd() {
     url: siteUrl,
     image: `${siteUrl}/opengraph-image.png`,
     logo: `${siteUrl}/images/logo/logo-vertical.png`,
+    hasMap: `https://www.google.com/maps?q=${encodeURIComponent(site.address)}`,
     telephone: `+81-${site.tel.slice(1)}`,
     faxNumber: `+81-${site.fax.slice(1)}`,
     address: {
@@ -49,6 +50,18 @@ export function medicalBusinessJsonLd() {
       name: site.operatorShort,
       parentOrganization: { "@type": "Organization", name: group.name, url: group.url },
     },
+  };
+}
+
+/** Google の検索結果にサイト名を正しく出すための情報（TOPにだけ置く） */
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    alternateName: [site.nameEn, "陽和", "ひより"],
+    url: `${siteUrl}/`,
+    inLanguage: "ja",
   };
 }
 
