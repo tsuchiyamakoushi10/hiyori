@@ -10,6 +10,4 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   { date: "2026.11.01", datetime: "2026-11-01", title: "訪問看護ステーション陽和を開設しました" },
-  // TODO 公開日が決まったら日付を入れる
-  { date: "2026.10.xx", datetime: "", title: "ホームページを公開しました" },
 ];
