@@ -1,4 +1,4 @@
-import { clientIp, isAllowedRequest, formatBody, isTooFrequent, markSent, signature, submitToGoogle } from "@/lib/mail";
+import { clientIp, isAllowedRequest, formatBody, isTooFrequent, markSent, debugDetail, signature, submitToGoogle } from "@/lib/mail";
 import { contactSchema, toFieldErrors } from "@/lib/schema";
 
 export async function POST(request: Request) {
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
   } catch (e) {
     console.error(e);
     return Response.json(
-      { ok: false, message: "送信できませんでした。お手数ですが、お電話（048-871-5511）でご連絡ください。" },
+      { ok: false, message: `送信できませんでした。お手数ですが、お電話（048-871-5511）でご連絡ください。${debugDetail(e)}` },
       { status: 500 },
     );
   }

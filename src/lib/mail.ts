@@ -33,8 +33,20 @@ export async function submitToGoogle({ sheet, fields, notify, autoReply }: Submi
     redirect: "follow",
     signal: AbortSignal.timeout(20_000),
   });
-  const result = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
-  if (!res.ok || !result?.ok) throw new Error(`Google Apps Script: ${result?.error ?? res.status}`);
+  const raw = await res.text();
+  let result: { ok?: boolean; error?: string } | null = null;
+  try {
+    result = JSON.parse(raw);
+  } catch {}
+  if (!res.ok || !result?.ok) {
+    throw new Error(`Google Apps Script: ${result?.error ?? `${res.status} ${raw.replace(/\s+/g, " ").slice(0, 120)}`}`);
+  }
+}
+
+/** 確認用ページ（Preview・手元）でだけ、送信失敗の理由を画面に出す */
+export function debugDetail(e: unknown) {
+  if (process.env.VERCEL_ENV === "production") return "";
+  return `（確認用：${e instanceof Error ? e.message : String(e)}）`;
 }
 
 /** 「項目：値」の本文を作る。空の項目は省く */
