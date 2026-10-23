@@ -44,6 +44,19 @@ export const site = {
   introCopy: "この街で、ずっと、そばに。",
 } as const;
 
+// 三友会福祉グループ（https://sanyukai.net/about/ の掲載どおり。2026-10-23 確認）
+export const group = {
+  name: "三友会福祉グループ",
+  url: "https://sanyukai.net/",
+  companies: [
+    { name: "株式会社グレートフル", url: "https://grateful-kaigo.com/" },
+    { name: "メディカルアシスト株式会社", url: "https://medicalassist-s.com/" },
+    { name: "ハートバンク株式会社", url: "https://heartbank.jp/" },
+    // 陽和の運営法人。独自サイトがないのでリンクなし
+    { name: "株式会社unique", url: null },
+  ],
+} as const;
+
 export const telHref = (num: string) => `tel:${num.replace(/-/g, "")}`;
 
 export const navItems = [

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import logoType from "../../../public/images/logo/logo-type.png";
-import { footerLinks, site, telHref } from "@/content/site";
+import { footerLinks, group, site, telHref } from "@/content/site";
 
 export function Footer() {
   return (
@@ -43,7 +43,32 @@ export function Footer() {
           </ul>
         </nav>
       </div>
-      <p className="mt-16 text-center font-en text-sm text-[#7f7268] italic">
+      <div className="container-site relative mt-12 border-t border-line pt-8">
+        <p className="leading-[1.9]">
+          {site.shortName}は
+          <a href={group.url} target="_blank" rel="noopener noreferrer" className="mx-1 font-serif text-ink underline underline-offset-4 hover:no-underline">
+            {group.name}
+            <span className="sr-only">（別サイトが開きます）</span>
+          </a>
+          の事業所です。
+        </p>
+        <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1">
+          {group.companies.map((c) => (
+            <li key={c.name}>
+              {c.url ? (
+                <a href={c.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 hover:text-ink">
+                  {c.name}
+                  <span aria-hidden="true" className="text-[11px]">↗</span>
+                  <span className="sr-only">（別サイトが開きます）</span>
+                </a>
+              ) : (
+                <span className="inline-flex min-h-11 items-center">{c.name}（運営法人）</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p className="mt-12 text-center font-en text-sm text-[#7f7268] italic">
         © 2026 {site.operatorShort} / HIYORI
       </p>
     </footer>
