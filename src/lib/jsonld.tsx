@@ -1,7 +1,12 @@
 import { careTypes } from "@/content/service";
 import { group, site } from "@/content/site";
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+// 正式なURL。明示の設定がなければ、Vercel が渡す本番のドメイン（独自ドメインを付けるとそちらになる）を使う
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
 
 export const siteDescription =
   "さいたま市北区の訪問看護ステーション陽和（ひより）。がん・緩和ケア、難病、医療的ケア、小児、精神科、ご自宅での看取りまで。北区・西区・大宮区・上尾市・伊奈町に訪問します。";

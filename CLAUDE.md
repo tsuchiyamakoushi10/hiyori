@@ -41,7 +41,7 @@ RESEND_API_KEY=
 MAIL_FROM="訪問看護ステーション陽和 <noreply@x-edge-mail.jp>"
 MAIL_TO_CONTACT=unique.hiyori@gmail.com
 MAIL_TO_ENTRY=unique.hiyori@gmail.com
-NEXT_PUBLIC_SITE_URL=   # 独自ドメイン確定後に設定
+NEXT_PUBLIC_SITE_URL=   # 通常は空でよい（Vercel の本番ドメインを自動で使う）。別のURLを正にしたいときだけ設定
 ```
 
 ---
