@@ -1,4 +1,4 @@
-import { clientIp, isAllowedRequest, formatBody, isTooFrequent, markSent, sendMail, signature } from "@/lib/mail";
+import { clientIp, isAllowedRequest, formatBody, isTooFrequent, markSent, signature, submitToGoogle } from "@/lib/mail";
 import { contactSchema, toFieldErrors } from "@/lib/schema";
 
 export async function POST(request: Request) {
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   }
 
   const v = parsed.data;
-  const detail = formatBody([
+  const fields: [string, string | undefined][] = [
     ["ご関係", v.relation],
     ["お名前", v.name],
     ["ふりがな", v.kana],
@@ -36,7 +36,8 @@ export async function POST(request: Request) {
     ["メールアドレス", v.email],
     ["ご希望の連絡方法", v.method],
     ["ご相談内容", v.message],
-  ]);
+  ];
+  const detail = formatBody(fields);
   // 入力者への控えには、選択肢の項目だけを載せる（自由記入欄を他人宛ての迷惑メールに悪用させないため）
   const replyDetail = formatBody([
     ["ご関係", v.relation],
@@ -44,19 +45,22 @@ export async function POST(request: Request) {
   ]);
 
   try {
-    await sendMail({
-      to: process.env.MAIL_TO_CONTACT ?? "",
-      subject: `【HP問い合わせ】${v.relation}｜${v.name}様`,
-      text: `ホームページからお問い合わせがありました。\n\n${detail}`,
-      replyTo: v.email || undefined,
+    await submitToGoogle({
+      sheet: "お問い合わせ",
+      fields,
+      notify: {
+        subject: `【HP問い合わせ】${v.relation}｜${v.name}様`,
+        text: `ホームページからお問い合わせがありました。\n\n${detail}`,
+        replyTo: v.email || undefined,
+      },
+      autoReply: v.email
+        ? {
+            to: v.email,
+            subject: "【訪問看護ステーション陽和】お問い合わせを受け付けました",
+            text: `${v.name}様\n\nお問い合わせいただき、ありがとうございます。\n以下の内容で受け付けました。担当者よりご連絡いたします。\n\n${replyDetail}\n${signature}`,
+          }
+        : undefined,
     });
-    if (v.email) {
-      await sendMail({
-        to: v.email,
-        subject: "【訪問看護ステーション陽和】お問い合わせを受け付けました",
-        text: `${v.name}様\n\nお問い合わせいただき、ありがとうございます。\n以下の内容で受け付けました。担当者よりご連絡いたします。\n\n${replyDetail}\n${signature}`,
-      });
-    }
   } catch (e) {
     console.error(e);
     return Response.json(

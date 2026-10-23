@@ -1,15 +1,40 @@
-import { Resend } from "resend";
 import { site } from "@/content/site";
 
-type Mail = { to: string; subject: string; text: string; replyTo?: string };
+type Mail = { subject: string; text: string; replyTo?: string };
+type Submission = {
+  /** 保存先のシート名 */
+  sheet: string;
+  /** スプレッドシートに1行で保存する項目（空欄も列をそろえるため含める） */
+  fields: [string, string | undefined][];
+  /** 事業所への通知（宛先はGoogle側の設定で決める） */
+  notify: Mail;
+  /** 入力者への自動返信 */
+  autoReply?: Mail & { to: string };
+};
 
-export async function sendMail({ to, subject, text, replyTo }: Mail) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.MAIL_FROM;
-  if (!apiKey || !from) throw new Error("RESEND_API_KEY / MAIL_FROM が設定されていません");
-  const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({ from, to, subject, text, replyTo });
-  if (error) throw new Error(`Resend: ${error.message}`);
+/**
+ * Google Apps Script に送る。Google側でスプレッドシートへの保存・通知・自動返信を行う。
+ * 中身は docs/forms/apps-script.gs、設定手順は docs/forms/README.md
+ */
+export async function submitToGoogle({ sheet, fields, notify, autoReply }: Submission) {
+  const url = process.env.GOOGLE_SCRIPT_URL;
+  const secret = process.env.GOOGLE_SCRIPT_SECRET;
+  if (!url || !secret) throw new Error("GOOGLE_SCRIPT_URL / GOOGLE_SCRIPT_SECRET が設定されていません");
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      secret,
+      sheet,
+      fields: fields.map(([label, value]) => [label, value ?? ""]),
+      notify,
+      autoReply,
+    }),
+    redirect: "follow",
+    signal: AbortSignal.timeout(20_000),
+  });
+  const result = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+  if (!res.ok || !result?.ok) throw new Error(`Google Apps Script: ${result?.error ?? res.status}`);
 }
 
 /** 「項目：値」の本文を作る。空の項目は省く */
@@ -28,7 +53,7 @@ export const signature = [
   `TEL ${site.tel}／FAX ${site.fax}`,
   `受付 ${site.hours}`,
   "──────────────────",
-  "※このメールは送信専用です。ご返信いただいてもお答えできません。",
+  "※このメールは自動でお送りしています。",
 ].join("\n");
 
 // 同一IPから60秒以内の再送を拒否する（インスタンスごとのメモリで判定する簡易版）。

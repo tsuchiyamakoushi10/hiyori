@@ -29,7 +29,7 @@
 - Next.js（App Router）＋ TypeScript ＋ Tailwind CSS
 - ホスティング：Vercel（**Proプラン**。商用のためHobbyは使わない）
 - リポジトリ：GitHub（`main` → 本番、PRごとにPreview）
-- フォーム送信：Next.js Route Handler ＋ **Resend**（送信元ドメインは X-EDGE の共通送信ドメイン `x-edge-mail.jp` を使う）
+- フォーム送信：Next.js Route Handler ＋ **Google Apps Script**（スプレッドシートに保存し、unique.hiyori@gmail.com から通知・自動返信を送る。設定手順は `docs/forms/README.md`）
 - バリデーション：zod（クライアント・サーバーの両方）
 - アニメーション：CSS ＋ IntersectionObserver で自作（5章）。アニメーション用のライブラリは入れない
 - フォント：`next/font/google` で Shippori Mincho（400/500/600）、Noto Sans JP（400/500）、Cormorant Garamond Italic（400/500）を読み込む
@@ -37,10 +37,8 @@
 
 ### 環境変数（Vercelに設定。コードに直書きしない）
 ```
-RESEND_API_KEY=
-MAIL_FROM="訪問看護ステーション陽和 <noreply@x-edge-mail.jp>"
-MAIL_TO_CONTACT=unique.hiyori@gmail.com
-MAIL_TO_ENTRY=unique.hiyori@gmail.com
+GOOGLE_SCRIPT_URL=      # Apps Script のウェブアプリURL（…/exec）
+GOOGLE_SCRIPT_SECRET=   # Apps Script のスクリプト プロパティ SECRET と同じ値
 NEXT_PUBLIC_SITE_URL=   # 通常は空でよい（Vercel の本番ドメインを自動で使う）。別のURLを正にしたいときだけ設定
 ```
 
@@ -309,7 +307,7 @@ public/images/
 - 必須マーク、エラーはフィールド直下に赤茶 `#B5543C` で表示
 - 送信中はボタンを無効化。完了後は `/thanks` に遷移
 - スパム対策：ハニーポット項目＋送信間隔のチェック（同一IPから60秒以内の再送を拒否）。reCAPTCHAは入れない
-- 送信内容は事業所宛て（`MAIL_TO_*`）と、入力者への自動返信（メール入力時のみ）の2通
+- 送信内容はスプレッドシートに保存し、事業所宛て（通知先は `docs/forms/apps-script.gs` の `NOTIFY_TO`）と、入力者への自動返信（メール入力時のみ）の2通
 - 件名：`【HP問い合わせ】{ご関係}｜{お名前}様`／`【採用エントリー】{職種}・{ご希望}｜{お名前}様`
 - プライバシーポリシーへの同意チェックを必須にする
 
