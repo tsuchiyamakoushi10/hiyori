@@ -324,7 +324,7 @@ public/images/
   - パンくず：`BreadcrumbList`
 - AI向けの要約 `/llms.txt`（`src/app/llms.txt/route.ts`。原稿データから自動で組み立てる）。よくある質問は `Faq` コンポーネントが `FAQPage` を自動で出力
 - 名刺のQRコードは `/card`（`next.config.ts` の redirects）を指す。**印刷物に載るので消さない**。共有ドメイン（`〜.vercel.app`）から独自ドメインへ移るときも、Vercelのプロジェクト名は変えず、旧ドメインからの転送を残す
-- 公開後、Google Search Console に登録して sitemap を送信
+- 公開後、Google Search Console に登録して sitemap を送信（手順は `docs/search-console.md`）
 - Googleビジネスプロフィールの登録をクライアントに提案する（制作範囲外、案内のみ）
 
 ---
@@ -396,7 +396,7 @@ public/images/
 - パートの時給と訪問ごとの手当の関係
 - 休憩時間
 - スタッフ2・3人目の原稿と写真
-- 独自ドメイン
+- ~~独自ドメイン~~ → `hiyori-houkan.com`（2026-10-23 接続。正式は www 付き、`NEXT_PUBLIC_SITE_URL` を Production に設定済み。手順は `docs/domain-setup.md`）
 - 料金の掲載（当面は非表示）
 
 ---
