@@ -1,4 +1,4 @@
-import { clientIp, isAllowedRequest, formatBody, isTooFrequent, markSent, sendMail, signature } from "@/lib/mail";
+import { clientIp, isAllowedRequest, formatBody, isTooFrequent, markSent, debugDetail, signature, submitToGoogle } from "@/lib/mail";
 import { entrySchema, toFieldErrors } from "@/lib/schema";
 
 export async function POST(request: Request) {
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   }
 
   const v = parsed.data;
-  const detail = formatBody([
+  const fields: [string, string | undefined][] = [
     ["ご希望", v.wish],
     ["希望職種", v.job],
     ["雇用形態", v.employment],
@@ -40,7 +40,8 @@ export async function POST(request: Request) {
     ["経験年数・経歴", v.career],
     ["ご希望の連絡方法・時間帯", v.contactTime],
     ["ご質問など", v.message],
-  ]);
+  ];
+  const detail = formatBody(fields);
   // 入力者への控えには、選択肢の項目だけを載せる（自由記入欄を他人宛ての迷惑メールに悪用させないため）
   const replyDetail = formatBody([
     ["ご希望", v.wish],
@@ -49,21 +50,24 @@ export async function POST(request: Request) {
   ]);
 
   try {
-    await sendMail({
-      to: process.env.MAIL_TO_ENTRY ?? "",
-      subject: `【採用エントリー】${v.job}・${v.wish}｜${v.name}様`,
-      text: `ホームページから採用エントリーがありました。\n\n${detail}`,
-      replyTo: v.email,
-    });
-    await sendMail({
-      to: v.email,
-      subject: "【訪問看護ステーション陽和】エントリーを受け付けました",
-      text: `${v.name}様\n\n陽和にご関心をお寄せいただき、ありがとうございます。\n以下の内容で受け付けました。担当者よりご連絡いたします。\n\n${replyDetail}\n${signature}`,
+    await submitToGoogle({
+      sheet: "採用エントリー",
+      fields,
+      notify: {
+        subject: `【採用エントリー】${v.job}・${v.wish}｜${v.name}様`,
+        text: `ホームページから採用エントリーがありました。\n\n${detail}`,
+        replyTo: v.email,
+      },
+      autoReply: {
+        to: v.email,
+        subject: "【訪問看護ステーション陽和】エントリーを受け付けました",
+        text: `${v.name}様\n\n陽和にご関心をお寄せいただき、ありがとうございます。\n以下の内容で受け付けました。担当者よりご連絡いたします。\n\n${replyDetail}\n${signature}`,
+      },
     });
   } catch (e) {
     console.error(e);
     return Response.json(
-      { ok: false, message: "送信できませんでした。お手数ですが、お電話（048-871-5511）でご連絡ください。" },
+      { ok: false, message: `送信できませんでした。お手数ですが、お電話（048-871-5511）でご連絡ください。${debugDetail(e)}` },
       { status: 500 },
     );
   }
