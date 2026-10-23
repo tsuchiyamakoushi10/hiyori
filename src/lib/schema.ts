@@ -4,6 +4,11 @@ import { contactPage, entryPage } from "@/content/forms";
 // クライアント・サーバーの両方で使う入力チェック
 
 const required = (label: string) => z.string({ error: `${label}を入力してください` }).trim().min(1, `${label}を入力してください`);
+// お名前欄にURLや改行を入れて、自動返信メールを迷惑メールの踏み台にされるのを防ぐ
+const personName = (label: string) =>
+  required(label)
+    .max(50)
+    .refine((v) => !/[\r\n]|https?:|www\.|\.(com|net|jp|ru|cn|xyz)\b/i.test(v), `${label}の書き方をご確認ください`);
 const optional = z.string().trim().max(2000).optional().default("");
 const tel = z
   .string({ error: "電話番号を入力してください" })
@@ -21,7 +26,7 @@ const honeypot = { website: z.string().max(0).optional().default("") };
 export const contactSchema = z
   .object({
     relation: pick(contactPage.relations, "ご関係"),
-    name: required("お名前").max(50),
+    name: personName("お名前"),
     kana: optional,
     organization: optional,
     tel,
@@ -40,8 +45,8 @@ export const entrySchema = z.object({
   wish: pick(entryPage.wishes, "ご希望"),
   job: pick(entryPage.jobs, "希望職種"),
   employment: pick(entryPage.employment, "雇用形態"),
-  name: required("お名前").max(50),
-  kana: required("ふりがな").max(50),
+  name: personName("お名前"),
+  kana: personName("ふりがな"),
   age: optional,
   tel,
   email: z.string({ error: "メールアドレスを入力してください" }).trim().min(1, "メールアドレスを入力してください").pipe(email),

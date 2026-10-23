@@ -1,3 +1,4 @@
+import { JsonLd } from "@/lib/jsonld";
 import { Phrase } from "./Phrase";
 
 type Props = {
@@ -8,6 +9,18 @@ type Props = {
 export function Faq({ items }: Props) {
   return (
     <div className="space-y-3">
+      {/* よくある質問を検索エンジン・AIに伝える */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: items.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: { "@type": "Answer", text: item.a },
+          })),
+        }}
+      />
       {items.map((item) => (
         <details key={item.q} className="group rounded-[20px] border border-line bg-paper">
           <summary className="flex min-h-14 cursor-pointer list-none items-start gap-4 px-5 py-4 sm:px-7 sm:py-5 [&::-webkit-details-marker]:hidden">

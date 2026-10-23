@@ -324,6 +324,8 @@ public/images/
   - 全ページ：`MedicalBusiness`（name、alternateName "HIYORI"、address、telephone、faxNumber、openingHours、areaServed、parentOrganization：株式会社unique）
   - 採用ページ：`JobPosting` を **看護師／PT・OT の2件**（Googleしごと検索に載せるため。給与は `baseSalary` に月給・時給を入れる。`datePosted` と `validThrough` を必ず入れる）
   - パンくず：`BreadcrumbList`
+- AI向けの要約 `/llms.txt`（`src/app/llms.txt/route.ts`。原稿データから自動で組み立てる）。よくある質問は `Faq` コンポーネントが `FAQPage` を自動で出力
+- 名刺のQRコードは `/card`（`next.config.ts` の redirects）を指す。**印刷物に載るので消さない**。共有ドメイン（`〜.vercel.app`）から独自ドメインへ移るときも、Vercelのプロジェクト名は変えず、旧ドメインからの転送を残す
 - 公開後、Google Search Console に登録して sitemap を送信
 - Googleビジネスプロフィールの登録をクライアントに提案する（制作範囲外、案内のみ）
 
