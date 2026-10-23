@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Noto_Sans_JP, Shippori_Mincho } from "next/font/google";
 import { FloatingCta } from "@/components/layout/FloatingCta";
@@ -46,6 +47,9 @@ export const metadata: Metadata = {
   },
 };
 
+// GA4 は本番だけで読み込む（Preview や手元の確認がアクセス数に混ざらないように）
+const gaId = process.env.VERCEL_ENV === "production" ? process.env.NEXT_PUBLIC_GA_ID : undefined;
+
 // 5-1：TOPの初回訪問時だけオープニングを出す。描画前に判定してちらつきを防ぐ。
 const introScript = `try{if(location.pathname==="/"&&!sessionStorage.getItem("hiyori-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("intro-on");sessionStorage.setItem("hiyori-intro","1")}}catch(e){}`;
 
@@ -75,6 +79,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <FloatingCta />
         <JsonLd data={medicalBusinessJsonLd()} />
       </body>
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }
